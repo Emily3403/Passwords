@@ -12,4 +12,4 @@ fi
 
 read -p "Password please: " -s password
 
-zbarimg -1 --raw -q -Sbinary secret.png  | openssl enc -d -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -pass file:<(echo -n $password) | paperkey --pubring pubkey.asc | gpg --import --batch --passphrase-file <(echo -n $password)
+zbarimg -1 --raw -q -Sbinary secret.png  | openssl enc -d -aes-256-cbc -md sha512 -pbkdf2 -iter 100000 -pass file:<(echo -n $password) | paperkey --pubring pubkey.asc | gpg --import --pinentry-mode loopback --passphrase="$password"
